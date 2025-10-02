@@ -1,0 +1,79 @@
+<tr class="text-gray-500" id="tr{{task.id}}" x-data="init()">
+    
+    <input id="task_id_{{task.id}}" value="{{task.id}}" name="task_id" type="hidden">
+
+    {% comment %} NAME {% endcomment %}
+    <td class="text-xl font-bold"  @click.shift="edits[0] = ! edits[0]" >
+        <div x-show="! edits[0]" >{{task.name}}</div>
+        <input class="input " name="input_name" x-show="edits[0]" type="input" value="{{task.name}}" />
+    </td>
+
+    {% comment %} CONTENT {% endcomment %}
+    <td class="text-xl font-bold"  @click.shift="edits[1] = ! edits[1]">
+        <div x-show="! edits[1]" class="truncate max-w-40">{{task.content}}</div>
+        <input class="input" name="input_content" x-show="edits[1]" type="input" value="{{task.content}}" />
+    </td>
+
+    {% comment %} CREATION DATE {% endcomment %}
+    <td class="text-xl font-bold">{{task.created_at|date:"M d, Y"}}</td>
+
+    {% comment %} START DATE {% endcomment %}
+    <td class="text-xl font-bold" @click.shift="edits[2] = ! edits[2]">            
+        <div x-show="! edits[2]" >{{task.start_date|date:"M d, Y"}}</div>
+        <input class="input " name="input_start_date" x-show="edits[2]" type="date" value="{{task.start_date|date:'Y-m-d'}}" />
+    </td>
+
+    {% comment %} DEADLINE DATE {% endcomment %}
+    <td class="text-xl font-bold" @click.shift="edits[3] = ! edits[3]">            
+        <div x-show="! edits[3]" >{{task.deadline_date|date:"M d, Y"}}</div>
+        <input class="input " name="input_deadline_date" x-show="edits[3]" type="date" value="{{task.deadline_date|date:'Y-m-d'}}" />
+    </td>
+
+    {% comment %} IMPORTANCE {% endcomment %}
+    <td class="text-xl font-bold w-24" @click.shift="edits[4] = ! edits[4]">
+        <div x-show="! edits[4]" >{{task.importance}}</div>
+        <input class="input w-24" name="input_importance" x-show="edits[4]" type="number" value="{{task.importance}}" />
+    </td>
+    
+    {% comment %} ACTIONS {% endcomment %}
+    <th id="buttons" >
+        <button class="btn btn-primary" @click="toggleEdit">Edit</button>   
+        <button class="btn btn-info" onclick="detail_model{{task.id}}.showModal()">Detail</button>
+        <dialog id="detail_model{{task.id}}" class="modal ">
+            <div class="modal-box max-w-screen-sm ">
+                <h3 class="text-lg font-bold ">Task{{task.id}}</h3>
+                <p class="py-4">Press ESC key or click the button below to close</p>
+
+                <p class="my-5"><span class="text-blue-700">Name:</span> {{task.name}}</p>
+                <p class="my-5 max-w-screen-sm break-words">
+                    <span class="text-blue-700">Content:</span> {{ task.content }}
+                </p>
+
+                <p class="my-5"><span class="text-blue-700">Creation date</span>: {{task.created_at}}</p>
+                <p class="my-5"><span class="text-blue-700">Start date</span>: {{task.start_date}}</p>
+                <p class="my-5"><span class="text-blue-700">Deadline date</span>: {{task.deadline_date}}</p>
+                <p class="my-5"><span class="text-blue-700">Importance:</span> {{task.importance}}</p>
+                <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn">Close</button>
+                </form>
+                </div>
+            </div>
+        </dialog>
+
+        <button 
+        class="btn btn-error text-black " hx-post="delete/" hx-swap="delete transition:true" 
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' 
+        hx-target="closest tr" 
+        hx-confirm="Are you sure you want to delete the task?" 
+        hx-include="#tr{{task.id}} input">Delete</button>
+
+        <button 
+        class="btn btn-accent text-black " hx-post="edit_task/" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'  hx-swap="outerHTML transition:true" 
+        hx-target="#tr{{task.id}}" 
+        hx-confirm="Are you sure you want to edit the task?"  
+        hx-include="#tr{{task.id}} input">Save</button>
+    </th>
+    
+</tr>
+

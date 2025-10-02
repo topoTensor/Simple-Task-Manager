@@ -1,0 +1,13 @@
+<td class="text-xl font-bold" @click="edit = ! edit" x-show="! edit">
+{% block td_task_part %}{% endblock td_task_part %}
+
+</td>
+<td class="text-xl font-bold" @keyup.enter="edit = ! edit" x-show="edit">
+    <input name={% block td_task_input_name %}{% endblock td_task_input_name %} 
+    
+    class="input" type="input" hx-post="edit_task/" hx-trigger="keyup[keyCode==13]" hx-include="#task_id_{{task.id}}" hx-target="#tr{{task.id}}" hx-swap="outerHTML"
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+    />
+
+    
+</td>

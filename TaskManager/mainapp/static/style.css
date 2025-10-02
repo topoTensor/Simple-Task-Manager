@@ -1,0 +1,32 @@
+#search_spinner {
+    display: none;
+}
+
+#search_spinner.htmx-request {
+    display: block;
+}
+
+.htmx-request[name='create_new_task_button'] {
+    filter: brightness(0.7);
+}
+
+[name='create_new_task_button'].activated {
+    filter: brightness(0.7);
+}
+
+.new_task_alert {
+    animation: fadeInAnimation ease-in 5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}

@@ -1,0 +1,28 @@
+<table class="table table-zebra rounded-box p-8 my-5 table-fixed w-full" id="task-table" >
+    <thead>
+    <tr>
+        <th class="w-1/3">Name</th>
+        <th class="w-1/2">Content</th>
+        <th class="w-1/3">Creation date</th>
+        <th class="w-1/3">Start date</th>
+        <th class="w-1/3">Deadline date</th>
+        <th class="w-1/6">Importance</th>
+        <th class="w-1/2">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for task in tasks %}
+        {% if forloop.first %}
+            {% include 'mainapp/partials/task_tr.html' %}
+        {% else %}
+            {% include 'mainapp/partials/task_tr_partial.html' %}
+        {% endif %}
+    {% empty %}
+    <tr>
+        <td colspan="6" class="text-center text-gray-400 py-4">
+            No tasks yet. 🎉
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

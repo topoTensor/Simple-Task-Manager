@@ -1,0 +1,30 @@
+<script>
+
+  function init() {
+
+    return {
+
+      edits: [false,false,false,false,false],
+      expand : true,
+
+      toggleEdit: function () {
+
+        if (this.edits.includes(false)) {
+            
+            for (e in this.edits) {
+                this.edits[e] = true
+            }
+        } else {
+            for (e in this.edits) {
+                this.edits[e] = false
+            }
+        }
+
+      },
+
+    };
+
+  }
+</script>
+
+{% include "mainapp/partials/task_tr_partial.html" %}

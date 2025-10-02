@@ -1,0 +1,21 @@
+<div class="flex my-5" id="filter" name="filter" 
+    hx-trigger="change" 
+    hx-get={% url 'filter' %} 
+    hx-target="#task-table" 
+    hx-swap="outerHTML transition:true"
+    hx-include="[name='select'], [name='reverse']">
+    
+    <select class="select" name="select">
+        <option value="name" >Name</option>
+        <option value="content" >Content</option>
+        <option selected value="created_at" >Creation Date</option>
+        <option value="start_date" >Start Date</option>
+        <option value="deadline_date" >Deadline Date</option>
+        <option value="importance" >Importance</option>
+    </select>
+
+    <div class="flex mx-5 border-gray-300 border-1 h-10 justify-between w-40 rounded-md self-center p-1">
+        <label class="self-center">Reverse filter</label>
+        <input type="checkbox" class="self-center checkbox" name="reverse" />
+    </div>
+</div>
