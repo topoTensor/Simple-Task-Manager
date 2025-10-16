@@ -32,6 +32,7 @@ A lightweight Single Page Application (SPA) task manager built with **Django**, 
 ## Screenshots
 
 <img width="1919" height="909" alt="image" src="https://github.com/user-attachments/assets/30b43fb4-c336-4ff8-aa85-1122c4a7dd40" />
+<img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/01875ef4-38a3-409e-aa62-ce136146ea2e" />
 
 ---
 
